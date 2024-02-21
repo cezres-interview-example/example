@@ -3,15 +3,15 @@ import 'package:example/widgets/global_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Future<dynamic> showGlobalTextFieldsAlertDialog(
+Future<dynamic> showTextFieldsAlertDialog(
   BuildContext context, {
   String? title,
-  required List<GlobalTextFieldsItem> items,
+  required List<TextFieldsAlertDialogItem> items,
   required void Function(List values) onConfirm,
 }) {
   return showGlobalBottomSheet(
     context,
-    child: GlobalTextFieldsAlertDialog(
+    child: TextFieldsAlertDialog(
       title: title,
       items: items,
       onConfirm: onConfirm,
@@ -19,8 +19,8 @@ Future<dynamic> showGlobalTextFieldsAlertDialog(
   );
 }
 
-class GlobalTextFieldsItem<T> {
-  const GlobalTextFieldsItem({
+class TextFieldsAlertDialogItem<T> {
+  const TextFieldsAlertDialogItem({
     required this.title,
     this.placeholder,
     this.value,
@@ -36,12 +36,12 @@ class GlobalTextFieldsItem<T> {
   final String Function(T value) encode;
   final T? Function(String text) decode;
 
-  static GlobalTextFieldsItem doubleTextField({
+  static TextFieldsAlertDialogItem doubleTextField({
     required String title,
     String? placeholder,
     double? value,
   }) {
-    return GlobalTextFieldsItem(
+    return TextFieldsAlertDialogItem(
       title: title,
       placeholder: placeholder,
       value: value,
@@ -51,12 +51,12 @@ class GlobalTextFieldsItem<T> {
     );
   }
 
-  static GlobalTextFieldsItem intTextField({
+  static TextFieldsAlertDialogItem intTextField({
     required String title,
     String? placeholder,
     int? value,
   }) {
-    return GlobalTextFieldsItem(
+    return TextFieldsAlertDialogItem(
       title: title,
       placeholder: placeholder,
       value: value,
@@ -66,12 +66,12 @@ class GlobalTextFieldsItem<T> {
     );
   }
 
-  static GlobalTextFieldsItem stringTextField({
+  static TextFieldsAlertDialogItem stringTextField({
     required String title,
     String? placeholder,
     String? value,
   }) {
-    return GlobalTextFieldsItem(
+    return TextFieldsAlertDialogItem(
       title: title,
       placeholder: placeholder,
       value: value,
@@ -82,8 +82,8 @@ class GlobalTextFieldsItem<T> {
   }
 }
 
-class GlobalTextFieldsAlertDialog extends StatelessWidget {
-  GlobalTextFieldsAlertDialog({
+class TextFieldsAlertDialog extends StatelessWidget {
+  TextFieldsAlertDialog({
     super.key,
     this.title,
     required this.items,
@@ -92,7 +92,7 @@ class GlobalTextFieldsAlertDialog extends StatelessWidget {
 
   final String? title;
   final ValueNotifier<Set<int>> errorIndex = ValueNotifier({});
-  final List<GlobalTextFieldsItem> items;
+  final List<TextFieldsAlertDialogItem> items;
   final void Function(List) onConfirm;
 
   @override

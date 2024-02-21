@@ -3,7 +3,7 @@ import 'package:example/routes/human_resources_metrics/widget/card.dart';
 import 'package:example/routes/human_resources_metrics/widget/parental_leave_rate_card.dart';
 import 'package:example/routes/human_resources_metrics/widget/value_editor.dart';
 import 'package:example/utils/format_text_for_double.dart';
-import 'package:example/widgets/global_text_fields_alert_dialog.dart';
+import 'package:example/widgets/text_fields_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,17 +37,17 @@ class HumanResourcesMetricsPage extends StatelessWidget {
         builder: (context, state) => Text(
             "${formatTextForDouble(state.lastYear)}%/${formatTextForDouble(state.twoYearsAgo)}%/${formatTextForDouble(state.threeYearsAgo)}%"),
         textFieldsBuilder: (state) => [
-          GlobalTextFieldsItem.doubleTextField(
+          TextFieldsAlertDialogItem.doubleTextField(
             title: '前年度(単位：%)',
             placeholder: '前年度中途採用比率',
             value: state.lastYear,
           ),
-          GlobalTextFieldsItem.doubleTextField(
+          TextFieldsAlertDialogItem.doubleTextField(
             title: '2年度前(単位：%)',
             placeholder: '2年度前中途採用比率',
             value: state.twoYearsAgo,
           ),
-          GlobalTextFieldsItem.doubleTextField(
+          TextFieldsAlertDialogItem.doubleTextField(
             title: '3年度前(単位：%)',
             placeholder: '3年度前中途採用比率',
             value: state.threeYearsAgo,
@@ -69,17 +69,17 @@ class HumanResourcesMetricsPage extends StatelessWidget {
         builder: (context, state) => Text(
             "${formatTextForDouble(state.lastYear)}%/${formatTextForDouble(state.twoYearsAgo)}%/${formatTextForDouble(state.threeYearsAgo)}%"),
         textFieldsBuilder: (state) => [
-          GlobalTextFieldsItem.doubleTextField(
+          TextFieldsAlertDialogItem.doubleTextField(
             title: '前年度(単位：%)',
             placeholder: '前年度中途採用比率',
             value: state.lastYear,
           ),
-          GlobalTextFieldsItem.doubleTextField(
+          TextFieldsAlertDialogItem.doubleTextField(
             title: '2年度前(単位：%)',
             placeholder: '2年度前中途採用比率',
             value: state.twoYearsAgo,
           ),
-          GlobalTextFieldsItem.doubleTextField(
+          TextFieldsAlertDialogItem.doubleTextField(
             title: '3年度前(単位：%)',
             placeholder: '3年度前中途採用比率',
             value: state.threeYearsAgo,
@@ -99,7 +99,7 @@ class HumanResourcesMetricsPage extends StatelessWidget {
         selector: (state) => state.averageYearsAtCompany,
         builder: (context, state) => Text("${formatTextForDouble(state)}年"),
         textFieldsBuilder: (state) => [
-          GlobalTextFieldsItem.doubleTextField(
+          TextFieldsAlertDialogItem.doubleTextField(
             title: '正社員の平均継続勤務年数',
             value: state,
           ),
@@ -113,7 +113,7 @@ class HumanResourcesMetricsPage extends StatelessWidget {
         selector: (state) => state.averageEmployeeAge,
         builder: (context, state) => Text("${formatTextForDouble(state)}歳"),
         textFieldsBuilder: (state) => [
-          GlobalTextFieldsItem.doubleTextField(
+          TextFieldsAlertDialogItem.doubleTextField(
             title: '従業員の平均年齢',
             value: state,
           ),
@@ -127,7 +127,7 @@ class HumanResourcesMetricsPage extends StatelessWidget {
         selector: (state) => state.averageMonthlyOvertimeHours,
         builder: (context, state) => Text("${formatTextForDouble(state)}時間"),
         textFieldsBuilder: (state) => [
-          GlobalTextFieldsItem.doubleTextField(
+          TextFieldsAlertDialogItem.doubleTextField(
             title: '月平均所定外労働時間',
             value: state,
           ),
@@ -141,7 +141,7 @@ class HumanResourcesMetricsPage extends StatelessWidget {
         selector: (state) => state.averageWorkersOver60Hours,
         builder: (context, state) => Text("$state人"),
         textFieldsBuilder: (state) => [
-          GlobalTextFieldsItem.intTextField(
+          TextFieldsAlertDialogItem.intTextField(
             title: '平均の法定時間外労働60時間以上の労働者の数',
             value: state,
           ),
@@ -172,7 +172,8 @@ class HumanResourcesMetricsPage extends StatelessWidget {
     String? subTitle,
     required T Function(HumanResourcesMetricsState state) selector,
     required Widget Function(BuildContext context, T state) builder,
-    required List<GlobalTextFieldsItem> Function(T state) textFieldsBuilder,
+    required List<TextFieldsAlertDialogItem> Function(T state)
+        textFieldsBuilder,
     required HumanResourcesMetricsEvent Function(List editValues)
         editEventBuilder,
   }) {
@@ -184,7 +185,7 @@ class HumanResourcesMetricsPage extends StatelessWidget {
           final textFields = textFieldsBuilder(
             selector(context.read<HumanResourcesMetricsBloc>().state),
           );
-          showGlobalTextFieldsAlertDialog(
+          showTextFieldsAlertDialog(
             context,
             title: textFields.length > 1 ? title : null,
             items: textFieldsBuilder(

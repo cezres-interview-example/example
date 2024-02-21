@@ -4,7 +4,7 @@ import 'package:example/routes/human_resources_metrics/bloc/human_resources_metr
 import 'package:example/routes/human_resources_metrics/widget/card.dart';
 import 'package:example/routes/human_resources_metrics/widget/value_editor.dart';
 import 'package:example/utils/format_text_for_double.dart';
-import 'package:example/widgets/global_text_fields_alert_dialog.dart';
+import 'package:example/widgets/text_fields_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -131,15 +131,15 @@ class HumanResourcesMetricsParentalLeaveRateCard extends StatelessWidget {
     ParentalLeaveRate? parentalLeaveRate,
   ) {
     final completer = Completer<ParentalLeaveRate>();
-    showGlobalTextFieldsAlertDialog(
+    showTextFieldsAlertDialog(
       context,
       title: title,
       items: [
-        GlobalTextFieldsItem.stringTextField(
+        TextFieldsAlertDialogItem.stringTextField(
             title: '職種',
             placeholder: '職種を入力してください',
             value: parentalLeaveRate?.type),
-        GlobalTextFieldsItem.doubleTextField(
+        TextFieldsAlertDialogItem.doubleTextField(
           title: '割合(単位：%)',
           placeholder: '割合を入力してください',
           value: parentalLeaveRate?.rate,
